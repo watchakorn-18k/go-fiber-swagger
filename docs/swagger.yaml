@@ -1,0 +1,74 @@
+
+openapi: 3.1.0
+
+info:
+  description: API go fiber template | Doc by wk18k.
+  title: API go fiber template | Doc by wk18k
+  version: "1.0"
+
+servers:
+  - url: /api/v1/users
+paths:
+  /add_user:
+    post:
+      tags:
+        - user
+      description: Add new user to the database
+      summary: Add new user to the database
+      requestBody:
+        required: true
+        description: Create a new user
+        content:
+          application/json:
+            example:
+              user_id: '01'
+              username: wk18k
+              email: wk18k@proton.me
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                message: success
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                message: cannot insert new user account.
+  /users:
+    get:
+      tags:
+        - user
+      security:
+        - bearerAuth: []
+      summary: List users from the database
+
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: integer
+          
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                message: success
+                data: []
+
+tags:
+  - name: user
+    description: Everything about users
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT Authorization header using the Bearer scheme.
+      in: header
+      name: Authorization

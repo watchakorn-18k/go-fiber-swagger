@@ -32,7 +32,7 @@ func main() {
 	app.Use(cors.New())
 	app.Use(swagger.New(swagger.Config{
 		BasePath: "/api/users/",
-		FilePath: "./docs/swagger.json",
+		FilePath: "./docs/swagger.yaml",
 		Path:     "docs",
 	}))
 
